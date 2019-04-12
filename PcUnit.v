@@ -1,10 +1,9 @@
-module PcUnit(PC,PcReSet,PcSel,Adress,Jump,Jumpaddr,clk,pause);
+module PcUnit(PC,PcReSet,PcSel,Adress,Jump,Jumpaddr,clk);
 
 	input   PcReSet;
 	input   PcSel;
     input   Jump;
 	input   clk;
-    input   pause;
 	input   [31:0] Adress;
     input   [25:0] Jumpaddr;
 	
@@ -14,10 +13,10 @@ module PcUnit(PC,PcReSet,PcSel,Adress,Jump,Jumpaddr,clk,pause);
 	always@(posedge clk or posedge PcReSet)
 	begin
 		if(PcReSet == 1)
-			PC <= 32'h0000_0000;
+			PC <= 32'h0000_3000;
 		else
             begin
-                if((PC <= 32'h0000_006c) && (pause == 0))
+                if(PC <= 32'h0000_3078)
                     PC = PC+4;
                 if(PcSel == 1)
                     begin

@@ -1,8 +1,16 @@
-module Mips(Clk,rstn,sw_i,led_o,o_seg,o_sel);
-    input   Clk,rstn;
-    input   [15:0]  sw_i;
-    output  [7:0]   o_seg,o_sel;
-    output reg [15:0]  led_o;
+module Mips();
+    reg Clk, Reset;
+    initial
+    begin
+        $readmemh( "Test_Signal_Pipeline2.txt", U_IM.IMem ) ; 
+        $monitor("PC = 0x%8X, IR = 0x%8X", U_pcUnit.PC, opCode );        
+        Clk = 1 ;
+        Reset = 0 ;
+        #5 Reset = 1 ;
+        #20 Reset = 0 ;
+    end
+    always
+	    #(50) Clk = ~Clk;
 //PC
     wire [31:0] pcOut;
 //IM
@@ -38,11 +46,7 @@ module Mips(Clk,rstn,sw_i,led_o,o_seg,o_sel);
     wire        zero;
 //Other
     wire        pcSel;
-    wire        divided_clk;                        //分频后的信号
-    reg  [31:0] disp_data;
-    wire        Reset;
-    wire [31:0] disp_mem;
-    assign Reset = ~rstn;
+    wire  [31:0] disp_data;
     assign pcSel = ((Branch&&zero)==1)?1:0;
     assign imAdr = pcOut[9:2];
     assign jumpaddr = opCode[25:0];
@@ -55,68 +59,15 @@ module Mips(Clk,rstn,sw_i,led_o,o_seg,o_sel);
     assign dmDataAdr = aluDataOut[9:2];
     assign gprDataIn = (Mem2R==1)?dmDataOut:aluDataOut;
     assign aluDataIn2 = (Alusrc==1)?extDataOut:gprDataOut2;
-    //15:分频控制位
-    //14:指令暂停控制位
-    //13:数码管显示控制位
-    //12:控制指令显示控制位
-    //11-8:数码管显示内容选择位
-    //7-0:内存地址位(共256个存储单元)
-    always @(*)
-    begin
-        if(sw_i[12])
-        begin
-            led_o[15] = divided_clk;
-            led_o[14] = ExtOp[1];
-            led_o[13] = ExtOp[0];
-            led_o[12] = Aluctrl[4];
-            led_o[11] = Aluctrl[3];
-            led_o[10] = Aluctrl[2];
-            led_o[9] = Aluctrl[1];
-            led_o[8] = Aluctrl[0];
-            led_o[7] = jump;
-            led_o[6] = RegDst;
-            led_o[5] = Branch;
-            led_o[4] = MemR;
-            led_o[3] = Mem2R;
-            led_o[2] = MemW;
-            led_o[1] = RegW;
-            led_o[0] = Alusrc;
-        end
-        else
-            led_o = sw_i;
-        if(sw_i[13])
-            case(sw_i[11:8])
-                0 : disp_data = (RegW)?gprDataIn:((MemW)?gprDataOut2:pcOut);
-                1 : disp_data = disp_mem;
-                2 : disp_data = pcOut;
-                3 : disp_data = opCode;
-                4 : disp_data = gprDataOut1;
-                5 : disp_data = gprDataOut2;
-                6 : disp_data = gprDataIn;
-                7 : disp_data = {27'd0,gprReSel1};
-                8 : disp_data = {27'd0,gprReSel2};
-                9 : disp_data = {27'd0,gprWeSel};
-                10: disp_data = {16'd0,extDataIn};
-                11: disp_data = extDataOut;
-                12: disp_data = gprDataOut1;
-                13: disp_data = aluDataIn2;
-                14: disp_data = aluDataOut;
-                15: disp_data = dmDataOut;
-            endcase
-        else
-            disp_data = (RegW)?gprDataIn:((MemW)?gprDataOut2:pcOut);
-    end
-    clk_div U_clk_div(.clk(Clk),.rst(Reset),.SW15(sw_i[15]),.Clk_CPU(divided_clk));
-    PcUnit U_pcUnit(.PC(pcOut),.PcReSet(Reset),.PcSel(pcSel),.Adress(extDataOut),.Jump(jump),.Jumpaddr(jumpaddr)
-                    ,.clk(divided_clk),.pause(sw_i[14]));
-    IMem U_IMem(.a(imAdr),.spo(opCode));
-    seg7x16 U_seg7x16(.clk(Clk),.reset(Reset),.i_data(disp_data),.o_seg(o_seg),.o_sel(o_sel));
-    GPR U_gpr(.DataOut1(gprDataOut1),.DataOut2(gprDataOut2),.clk(divided_clk),.WData(gprDataIn)
+    assign disp_data = (RegW)?gprDataIn:((MemW)?gprDataOut2:pcOut);
+    PcUnit U_pcUnit(.PC(pcOut),.PcReSet(Reset),.PcSel(pcSel),.Adress(extDataOut),.Jump(jump),.Jumpaddr(jumpaddr),.clk(Clk));
+    IM U_IM(.OpCode(opCode),.ImAdress(imAdr));
+    GPR U_gpr(.DataOut1(gprDataOut1),.DataOut2(gprDataOut2),.clk(Clk),.WData(gprDataIn)
               ,.WE(RegW),.WeSel(gprWeSel),.ReSel1(gprReSel1),.ReSel2(gprReSel2));
     Ctrl U_Ctrl(.jump(jump),.RegDst(RegDst),.Branch(Branch),.MemR(MemR),.Mem2R(Mem2R)
                 ,.MemW(MemW),.RegW(RegW),.Alusrc(Alusrc),.ExtOp(ExtOp),.Aluctrl(Aluctrl)
                 ,.OpCode(op),.funct(funct));
     Extender U_extend(.ExtOut(extDataOut),.DataIn(extDataIn),.ExtOp(ExtOp));
     Alu U_Alu(.AluResult(aluDataOut),.Zero(zero),.DataIn1(gprDataOut1),.DataIn2(aluDataIn2),.Shamt(opCode[10:6]),.AluCtrl(Aluctrl));
-    DMem U_DMem(.DataOut(dmDataOut),.DataAdr(dmDataAdr),.DataIn(gprDataOut2),.DMemW(MemW),.DMemR(MemR),.clk(divided_clk),.sel(sw_i[7:0]),.disp(disp_mem));
+    DMem U_DMem(.DataOut(dmDataOut),.DataAdr(dmDataAdr),.DataIn(gprDataOut2),.DMemW(MemW),.DMemR(MemR),.clk(Clk));
 endmodule
