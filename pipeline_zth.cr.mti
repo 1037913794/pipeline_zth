@@ -39,12 +39,12 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 } {} {}} D:/WHU/Sophomore_B/pipeline_zth/ctrl_encode_def.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/ctrl_encode_def.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 
-} {} {}} D:/WHU/Sophomore_B/pipeline_zth/GPR.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/GPR.v
+} {} {}} D:/WHU/Sophomore_B/pipeline_zth/Mips.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/Mips.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
--- Compiling module GPR
+-- Compiling module Mips
 
 Top level modules:
-	GPR
+	Mips
 
 } {} {}} D:/WHU/Sophomore_B/pipeline_zth/Ctrl.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/Ctrl.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
@@ -53,11 +53,11 @@ Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
 Top level modules:
 	Ctrl
 
-} {} {}} D:/WHU/Sophomore_B/pipeline_zth/Mips.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/Mips.v
+} {} {}} D:/WHU/Sophomore_B/pipeline_zth/GPR.v {1 {vlog -work work -vopt D:/WHU/Sophomore_B/pipeline_zth/GPR.v
 Model Technology ModelSim SE vlog 10.1a Compiler 2012.02 Feb 22 2012
--- Compiling module Mips
+-- Compiling module GPR
 
 Top level modules:
-	Mips
+	GPR
 
 } {} {}}

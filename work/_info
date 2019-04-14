@@ -16,12 +16,12 @@ L0 2
 Z1 OE;L;10.1a;51
 Z2 o-work work -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 n@alu
-!i10b 1
-!s85 0
 !s100 0WcNTElG2??k0JP`Bb64:0
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/Alu.v|
-!s108 1555061002.554000
+!s108 1555199973.166000
 !s107 ctrl_encode_def.v|D:/WHU/Sophomore_B/pipeline_zth/Alu.v|
+!i10b 1
+!s85 0
 vCtrl
 V5P6]SXQ_Ao?Y3=kHH92hQ1
 r1
@@ -35,17 +35,15 @@ L0 4
 R1
 R2
 n@ctrl
-!i10b 1
-!s85 0
 !s100 3iEaaoYXkSDZ9hPRTD1hT2
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/Ctrl.v|
-!s108 1555061002.694000
+!s108 1555199973.358000
 !s107 ctrl_encode_def.v|instruction_def.v|D:/WHU/Sophomore_B/pipeline_zth/Ctrl.v|
-vDMem
 !i10b 1
+!s85 0
+vDMem
 VUfWGVEe[kZX`^F@^aQP_L0
 r1
-!s85 0
 31
 IBH2Eg=3?m>XJT1[8ZbChi0
 R3
@@ -58,8 +56,10 @@ R2
 n@d@mem
 !s100 ^Bi?Yb>k=U7J_6@bWC84O2
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/DMem.v|
-!s108 1555061002.944000
+!s108 1555199973.705000
 !s107 D:/WHU/Sophomore_B/pipeline_zth/DMem.v|
+!i10b 1
+!s85 0
 vExtender
 VX<KDk7Y><P3EkfboZHNMI0
 r1
@@ -73,31 +73,31 @@ L0 2
 R1
 R2
 n@extender
-!i10b 1
-!s85 0
 !s100 Ab`3KlhXW`ZH=NC8okh7Y1
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/Extender.v|
-!s108 1555061003.288000
+!s108 1555199973.971000
 !s107 ctrl_encode_def.v|D:/WHU/Sophomore_B/pipeline_zth/Extender.v|
+!i10b 1
+!s85 0
 vGPR
 VXafm@[6TSlmzMRG@Sa]DE2
 r1
 31
 I`J:mg>Q@0fL1lIFP:J7bF2
 R3
-w1512372160
+w1555160564
 8D:/WHU/Sophomore_B/pipeline_zth/GPR.v
 FD:/WHU/Sophomore_B/pipeline_zth/GPR.v
 L0 2
 R1
 R2
 n@g@p@r
-!i10b 1
-!s85 0
 !s100 ;_RG>3412nFn2=4BIkoKe0
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/GPR.v|
-!s108 1555061003.413000
+!s108 1555199974.204000
 !s107 D:/WHU/Sophomore_B/pipeline_zth/GPR.v|
+!i10b 1
+!s85 0
 vIM
 VeNI6OI@gBWS:oZZO]3YU[3
 r1
@@ -111,47 +111,47 @@ L0 2
 R1
 R2
 n@i@m
-!i10b 1
-!s85 0
 !s100 4@<KVl<DadDR0nDcZ8ZoL0
 !s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/IM.v|
-!s108 1555061003.553000
+!s108 1555199974.513000
 !s107 D:/WHU/Sophomore_B/pipeline_zth/IM.v|
+!i10b 1
+!s85 0
 vMips
+!i10b 1
 VcG?AS<6?FRhk20XnRNgkR0
 r1
+!s85 0
 31
-IJaB@`G?E>`LQ^E?P^^V@z2
+IJF3e86P2ZQE4R8GWH:_Om3
 R3
-w1555060797
+w1555201092
 8D:/WHU/Sophomore_B/pipeline_zth/Mips.v
 FD:/WHU/Sophomore_B/pipeline_zth/Mips.v
 L0 1
 R1
+!s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/Mips.v|
 R2
 n@mips
-!i10b 1
-!s85 0
-!s100 nQFQE7_Y?<I64fjco=aK51
-!s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/Mips.v|
-!s108 1555061003.866000
+!s100 ML1B6Z:Kk`3XWl?;FUODD0
+!s108 1555201105.437000
 !s107 D:/WHU/Sophomore_B/pipeline_zth/Mips.v|
 vPcUnit
-VX1D8`EX4=I9KR4U2K:G:21
+VAkhONCPH1E=L75nIHA=JE0
 r1
 31
-Ii?h?4MPgdCS069mgPmQOB2
+ISIa1;02Yg@anE<=U:AK@e0
 R3
-w1555059482
+w1555170822
 8D:/WHU/Sophomore_B/pipeline_zth/PcUnit.v
 FD:/WHU/Sophomore_B/pipeline_zth/PcUnit.v
 L0 1
 R1
 R2
 n@pc@unit
+!s100 MCA0k>`^;eFC]F>2Za3fP2
+!s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/PcUnit.v|
+!s108 1555199975.187000
+!s107 D:/WHU/Sophomore_B/pipeline_zth/PcUnit.v|
 !i10b 1
 !s85 0
-!s100 HLKlhWfG=R9WBLVP`gcoS3
-!s90 -reportprogress|300|-work|work|-vopt|D:/WHU/Sophomore_B/pipeline_zth/PcUnit.v|
-!s108 1555061004.006000
-!s107 D:/WHU/Sophomore_B/pipeline_zth/PcUnit.v|
